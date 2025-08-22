@@ -80,10 +80,10 @@ public class AdminDashboardPanel extends JPanel {
 
      // Create clean tabbed pane with helper methods
      tabbedPane = new JTabbedPane();
-     tabbedPane.addTab("📊 Statistics", createStatisticsPanel());
-     tabbedPane.addTab("👥 Users", createUsersPanel());
-     tabbedPane.addTab("📝 Posts", createPostsPanel());
-     tabbedPane.addTab("📋 Requests", createRequestsPanel());
+     tabbedPane.addTab("Statistics", IconHelper.createStatisticsIcon(), createStatisticsPanel(), "View system statistics");
+     tabbedPane.addTab("Users", IconHelper.createUsersIcon(), createUsersPanel(), "Manage users");
+     tabbedPane.addTab("Posts", IconHelper.createPostsIcon(), createPostsPanel(), "Manage posts");
+     tabbedPane.addTab("Requests", IconHelper.createRequestsIcon(), createRequestsPanel(), "View requests");
 
      UIStyleHelper.styleTabbedPane(tabbedPane);
      contentPanel.add(tabbedPane, BorderLayout.CENTER);
@@ -95,7 +95,7 @@ public class AdminDashboardPanel extends JPanel {
      User currentUser = appController.getCurrentUser();
      welcomeLabel = new JLabel("Welcome, Administrator: " + (currentUser != null ? currentUser.getUsername() : "Unknown"));
      welcomeLabel.setFont(UIStyleHelper.getHeaderFont());
-     logoutButton = new JButton("Logout");
+     logoutButton = new JButton("Logout", IconHelper.createLogoutIcon());
      
      tabbedPane = new JTabbedPane();
      
@@ -125,11 +125,11 @@ public class AdminDashboardPanel extends JPanel {
      requestsTable = new JTable(requestsTableModel);
      
      // Buttons
-     deleteUserButton = new JButton("Delete Selected User");
-     refreshUsersButton = new JButton("Refresh Users");
-     deletePostButton = new JButton("Delete Selected Post");
-     refreshPostsButton = new JButton("Refresh Posts");
-     refreshRequestsButton = new JButton("Refresh Requests");
+     deleteUserButton = new JButton("Delete Selected User", IconHelper.createDeleteIcon());
+     refreshUsersButton = new JButton("Refresh Users", IconHelper.createRefreshIcon());
+     deletePostButton = new JButton("Delete Selected Post", IconHelper.createDeleteIcon());
+     refreshPostsButton = new JButton("Refresh Posts", IconHelper.createRefreshIcon());
+     refreshRequestsButton = new JButton("Refresh Requests", IconHelper.createRefreshIcon());
      
      // Statistics labels
      totalUsersLabel = new JLabel("Total Users: 0");

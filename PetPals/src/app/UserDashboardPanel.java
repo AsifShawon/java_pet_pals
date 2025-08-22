@@ -95,11 +95,11 @@ public class UserDashboardPanel extends JPanel {
     JPanel notificationsPanel = createNotificationsPanel();
     JPanel profilePanel = createProfilePanel();
 
-    tabbedPane.addTab("🏠 All Posts", postsPanel);
-    tabbedPane.addTab("📝 My Posts", myPostsPanel);
-    tabbedPane.addTab("📋 My Requests", myRequestsPanel);
-    tabbedPane.addTab("🔔 Notifications", notificationsPanel);
-    tabbedPane.addTab("👤 Profile", profilePanel);
+    tabbedPane.addTab("All Posts", IconHelper.createHomeIcon(), postsPanel, "Browse all available posts");
+    tabbedPane.addTab("My Posts", IconHelper.createPostsIcon(), myPostsPanel, "Manage your posts");
+    tabbedPane.addTab("My Requests", IconHelper.createRequestsIcon(), myRequestsPanel, "View your requests");
+    tabbedPane.addTab("Notifications", IconHelper.createNotificationIcon(), notificationsPanel, "View notifications");
+    tabbedPane.addTab("Profile", IconHelper.createProfileIcon(), profilePanel, "Edit your profile");
 
     UIStyleHelper.styleTabbedPane(tabbedPane);
 
@@ -131,7 +131,7 @@ public class UserDashboardPanel extends JPanel {
     User currentUser = appController.getCurrentUser();
     welcomeLabel = new JLabel("Welcome, " + (currentUser != null ? currentUser.getUsername() : "Unknown"));
     welcomeLabel.setFont(UIStyleHelper.getHeaderFont());
-    logoutButton = new JButton("Logout");
+    logoutButton = new JButton("Logout", IconHelper.createLogoutIcon());
     
     tabbedPane = new JTabbedPane();
     
@@ -163,13 +163,13 @@ public class UserDashboardPanel extends JPanel {
     myRequestsTable = new JTable(myRequestsTableModel);
     
     // Buttons
-    createPostButton = new JButton("Create New Post");
-    refreshPostsButton = new JButton("Refresh");
-    requestButton = new JButton("Request Selected Post");
-    refreshMyPostsButton = new JButton("Refresh My Posts");
-    deleteMyPostButton = new JButton("Delete Selected Post");
-    viewRequestsForPostButton = new JButton("View Requests");
-    refreshMyRequestsButton = new JButton("Refresh Requests");
+    createPostButton = new JButton("Create New Post", IconHelper.createCreateIcon());
+    refreshPostsButton = new JButton("Refresh", IconHelper.createRefreshIcon());
+    requestButton = new JButton("Request Selected Post", IconHelper.createSendIcon());
+    refreshMyPostsButton = new JButton("Refresh My Posts", IconHelper.createRefreshIcon());
+    deleteMyPostButton = new JButton("Delete Selected Post", IconHelper.createDeleteIcon());
+    viewRequestsForPostButton = new JButton("View Requests", IconHelper.createViewIcon());
+    refreshMyRequestsButton = new JButton("Refresh Requests", IconHelper.createRefreshIcon());
     
     // Search and filter components
     searchField = new JTextField(20);
@@ -180,7 +180,7 @@ public class UserDashboardPanel extends JPanel {
     profileContactField = new JTextField(50);
     newPasswordField = new JPasswordField(50);
     confirmPasswordField = new JPasswordField(50);
-    updateProfileButton = new JButton("Update Profile");
+    updateProfileButton = new JButton("Update Profile", IconHelper.createUpdateIcon());
     
     // Set much larger preferred size for better visibility
     java.awt.Dimension extraWideField = new java.awt.Dimension(600, 40); // Increased width and height
@@ -233,19 +233,19 @@ public class UserDashboardPanel extends JPanel {
      
      // All Posts tab
      JPanel postsPanel = createPostsPanel();
-     tabbedPane.addTab("🏠 All Posts", postsPanel);
+     tabbedPane.addTab("All Posts", IconHelper.createHomeIcon(), postsPanel, "Browse all available posts");
      
      // My Posts tab
      JPanel myPostsPanel = createMyPostsPanel();
-     tabbedPane.addTab("📝 My Posts", myPostsPanel);
+     tabbedPane.addTab("My Posts", IconHelper.createPostsIcon(), myPostsPanel, "Manage your posts");
      
      // My Requests tab
      JPanel myRequestsPanel = createMyRequestsPanel();
-     tabbedPane.addTab("📋 My Requests", myRequestsPanel);
+     tabbedPane.addTab("My Requests", IconHelper.createRequestsIcon(), myRequestsPanel, "View your requests");
      
      // Profile tab
      JPanel profilePanel = createProfilePanel();
-     tabbedPane.addTab("👤 Profile", profilePanel);
+     tabbedPane.addTab("Profile", IconHelper.createProfileIcon(), profilePanel, "Edit your profile");
      
      UIStyleHelper.styleTabbedPane(tabbedPane);
      contentPanel.add(tabbedPane, BorderLayout.CENTER);
@@ -395,7 +395,7 @@ public class UserDashboardPanel extends JPanel {
      UIStyleHelper.stylePanel(buttonPanel);
      buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
      
-     refreshNotificationsButton = new JButton("Refresh");
+     refreshNotificationsButton = new JButton("Refresh", IconHelper.createRefreshIcon());
      UIStyleHelper.styleSecondaryButton(refreshNotificationsButton);
      
      markAsReadButton = new JButton("Mark as Read");
@@ -423,7 +423,7 @@ public class UserDashboardPanel extends JPanel {
     
     // Title
     gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
-    JLabel titleLabel = new JLabel("👤 Profile Settings");
+    JLabel titleLabel = new JLabel("Profile Settings");
     UIStyleHelper.styleLabel(titleLabel, UIStyleHelper.LabelStyle.HEADER);
     titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
     profileCard.add(titleLabel, gbc);
@@ -906,9 +906,9 @@ public class UserDashboardPanel extends JPanel {
      if (unreadCount > 0) {
          // Update the tab title to show notification count
          int notificationTabIndex = 3; // Notifications tab
-         tabbedPane.setTitleAt(notificationTabIndex, "🔔 Notifications (" + unreadCount + ")");
+         tabbedPane.setTitleAt(notificationTabIndex, "Notifications (" + unreadCount + ")");
      } else {
-         tabbedPane.setTitleAt(3, "🔔 Notifications");
+         tabbedPane.setTitleAt(3, "Notifications");
      }
  }
  

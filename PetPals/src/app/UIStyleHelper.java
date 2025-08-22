@@ -213,6 +213,71 @@ public class UIStyleHelper {
      ));
  }
  
+ public static void stylePanelWithBackground(JPanel panel, String imagePath) {
+     panel.setBackground(BACKGROUND_COLOR);
+     // The background image will be handled by BackgroundImagePanel
+ }
+ 
+ // Custom JPanel class that supports background images
+ public static class BackgroundImagePanel extends JPanel {
+     private Image backgroundImage;
+     private float opacity = 0.3f; // 30% opacity for subtle background
+     
+     public BackgroundImagePanel(String imagePath) {
+         try {
+             // Load the background image
+             backgroundImage = Toolkit.getDefaultToolkit().getImage(imagePath);
+             // Ensure the image is loaded
+             MediaTracker tracker = new MediaTracker(this);
+             tracker.addImage(backgroundImage, 0);
+             tracker.waitForAll();
+         } catch (Exception e) {
+             System.err.println("Could not load background image: " + imagePath);
+             backgroundImage = null;
+         }
+         setOpaque(false);
+     }
+     
+     public void setOpacity(float opacity) {
+         this.opacity = Math.max(0.0f, Math.min(1.0f, opacity));
+         repaint();
+     }
+     
+     @Override
+     protected void paintComponent(Graphics g) {
+         super.paintComponent(g);
+         
+         if (backgroundImage != null) {
+             Graphics2D g2d = (Graphics2D) g.create();
+             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
+             
+             // Scale image to fit the panel while maintaining aspect ratio
+             int panelWidth = getWidth();
+             int panelHeight = getHeight();
+             int imageWidth = backgroundImage.getWidth(this);
+             int imageHeight = backgroundImage.getHeight(this);
+             
+             if (imageWidth > 0 && imageHeight > 0) {
+                 // Calculate scaling to cover the entire panel
+                 double scaleX = (double) panelWidth / imageWidth;
+                 double scaleY = (double) panelHeight / imageHeight;
+                 double scale = Math.max(scaleX, scaleY); // Use max to cover entire area
+                 
+                 int scaledWidth = (int) (imageWidth * scale);
+                 int scaledHeight = (int) (imageHeight * scale);
+                 
+                 // Center the image
+                 int x = (panelWidth - scaledWidth) / 2;
+                 int y = (panelHeight - scaledHeight) / 2;
+                 
+                 g2d.drawImage(backgroundImage, x, y, scaledWidth, scaledHeight, this);
+             }
+             
+             g2d.dispose();
+         }
+     }
+ }
+ 
  public static void styleTabbedPane(JTabbedPane tabbedPane) {
      tabbedPane.setFont(getStandardFont().deriveFont(Font.BOLD));
      tabbedPane.setBackground(BACKGROUND_COLOR);

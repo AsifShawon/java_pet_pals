@@ -30,11 +30,16 @@ public class LoginPanel extends JPanel {
  
  // WindowBuilder-friendly UI init
  private void initComponents() {
-     UIStyleHelper.stylePanel(this);
+     // Create background panel with image
+     UIStyleHelper.BackgroundImagePanel backgroundPanel = 
+         new UIStyleHelper.BackgroundImagePanel("E:\\JAVA\\PetPals\\image\\pet_bg.jpg");
+     backgroundPanel.setOpacity(0.2f); // 20% opacity for subtle effect
+     backgroundPanel.setLayout(new BorderLayout());
 
      // Main container with padding
      JPanel mainContainer = new JPanel(new GridBagLayout());
-     UIStyleHelper.stylePanel(mainContainer);
+     mainContainer.setOpaque(false); // Make transparent to show background
+     UIStyleHelper.stylePanelWithBackground(mainContainer, null);
 
      // Login card
      JPanel loginCard = new JPanel();
@@ -80,11 +85,11 @@ public class LoginPanel extends JPanel {
      // Admin login hint
      gbc.gridx = 0; gbc.gridy = 4; gbc.fill = GridBagConstraints.NONE;
      gbc.insets = new Insets(10, 20, 5, 20);
-     JLabel adminHintLabel = new JLabel("Admin Login: username='admin', password='admin'");
-     adminHintLabel.setFont(UIStyleHelper.getSmallFont());
-     adminHintLabel.setForeground(UIStyleHelper.TEXT_SECONDARY);
-     adminHintLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-     formPanel.add(adminHintLabel, gbc);
+    //  JLabel adminHintLabel = new JLabel("Admin Login: username='admin', password='admin'");
+    //  adminHintLabel.setFont(UIStyleHelper.getSmallFont());
+    //  adminHintLabel.setForeground(UIStyleHelper.TEXT_SECONDARY);
+    //  adminHintLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+    //  formPanel.add(adminHintLabel, gbc);
 
      // Button section
      JPanel buttonPanel = new JPanel();
@@ -108,8 +113,11 @@ public class LoginPanel extends JPanel {
      GridBagConstraints mainGbc = new GridBagConstraints();
      mainContainer.add(loginCard, mainGbc);
 
+     // Add main container to background panel
+     backgroundPanel.add(mainContainer, BorderLayout.CENTER);
+
      setLayout(new BorderLayout());
-     add(mainContainer, BorderLayout.CENTER);
+     add(backgroundPanel, BorderLayout.CENTER);
  }
  
  private void initializeComponents() {

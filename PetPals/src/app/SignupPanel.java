@@ -31,10 +31,16 @@ public class SignupPanel extends JPanel {
  
  private void initComponents() {
      setLayout(new BorderLayout());
-     UIStyleHelper.stylePanel(this);
+     
+     // Create background panel with image
+     UIStyleHelper.BackgroundImagePanel backgroundPanel = 
+         new UIStyleHelper.BackgroundImagePanel("E:\\JAVA\\PetPals\\image\\pet_bg.jpg");
+     backgroundPanel.setOpacity(0.2f); // 20% opacity for subtle effect
+     backgroundPanel.setLayout(new BorderLayout());
      
      JPanel mainContainer = new JPanel(new GridBagLayout());
-     UIStyleHelper.stylePanel(mainContainer);
+     mainContainer.setOpaque(false); // Make transparent to show background
+     UIStyleHelper.stylePanelWithBackground(mainContainer, null);
      
      JPanel signupCard = new JPanel();
      signupCard.setLayout(new BoxLayout(signupCard, BoxLayout.Y_AXIS));
@@ -112,7 +118,10 @@ public class SignupPanel extends JPanel {
      GridBagConstraints mainGbc = new GridBagConstraints();
      mainContainer.add(signupCard, mainGbc);
      
-     add(mainContainer, BorderLayout.CENTER);
+     // Add main container to background panel
+     backgroundPanel.add(mainContainer, BorderLayout.CENTER);
+     
+     add(backgroundPanel, BorderLayout.CENTER);
  }
  
  private void initializeComponents() {

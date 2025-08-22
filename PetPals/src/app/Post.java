@@ -9,12 +9,11 @@ public class Post implements Serializable {
  
  private String id;
  private String authorId;
- // Use enum for strong typing
  private PostType type; // DONATE or NEED
  private String title;
  private String description;
  private LocalDateTime timestamp;
- // Added optional image path for social-media style posts
+
  private String imagePath; // relative or absolute path to image (may be null)
  
  // Constructors

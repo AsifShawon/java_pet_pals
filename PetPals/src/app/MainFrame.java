@@ -1,8 +1,8 @@
 package app;
 
 //MainFrame.java
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class MainFrame extends JFrame {
  private AppController appController;
@@ -60,7 +60,7 @@ public class MainFrame extends JFrame {
      
      // Set application icon (if available)
      try {
-         setIconImage(Toolkit.getDefaultToolkit().getImage("image/pet_bg.jpg"));
+         setIconImage(Toolkit.getDefaultToolkit().getImage("E://JAVA//PetPals//image/pet_bg.jpg"));
      } catch (Exception e) {
          // Icon not found, continue without it
      }
